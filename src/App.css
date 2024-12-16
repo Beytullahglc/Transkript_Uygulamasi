@@ -1,0 +1,165 @@
+/* Genel stil ayarları */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f7f7f7;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.App {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  padding: 40px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* Başlık stil */
+h1 {
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* Dosya yükleme butonunun stili */
+.file-upload-container {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.file-upload-container input[type="file"] {
+  display: none;
+}
+
+.file-upload-label {
+  cursor: pointer;
+  font-size: 40px;
+  color: #007bff;
+  transition: color 0.3s;
+}
+
+.file-upload-label:hover {
+  color: #0056b3;
+}
+
+/* Dosya adını göstermek için stil */
+.file-name {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Select dropdown stil */
+.select-container {
+  display: flex;
+  justify-content: center; /* Centers the select box horizontally */
+  margin-bottom: 20px;
+}
+
+/* Ensure the select box does not stretch */
+.select-box {
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto; /* Centers the select box */
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Info ikonu stil */
+.info-icon {
+  font-size: 18px;
+  color: #007bff;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.info-icon:hover {
+  color: #0056b3;
+}
+
+/* Transkript butonunun stili */
+.transcribe-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.transcribe-button:disabled {
+  background-color: #ddd;
+}
+
+.transcribe-button:hover:enabled {
+  background-color: #45a049;
+}
+
+/* Transkript sonucu stili */
+.transcript-result {
+  margin-top: 20px;
+  text-align: left;
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.transcript-result h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #4CAF50;
+}
+
+.transcript-result p {
+  font-size: 1rem;
+  color: #333;
+  word-wrap: break-word;
+}
+
+/* Dönen işaret için stil */
+.spinner {
+  animation: spin 1s linear infinite;
+  margin-right: 10px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.tooltip {
+  visibility: hidden;
+  width: 120px;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 130%; /* Position above the dropdown */
+  left: 50%;
+  margin-left: -60px; /* Center the tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip-visible {
+  visibility: visible;
+  opacity: 1;
+}
