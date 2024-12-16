@@ -1,0 +1,2 @@
+# Transkript_Uygulamasi
+ 
