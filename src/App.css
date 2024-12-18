@@ -31,7 +31,13 @@ h1 {
 /* Dosya yükleme butonunun stili */
 .file-upload-container {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  padding: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.file-upload-container:hover {
+  background-color: rgba(0, 123, 255, 0.1); /* Hover durumunda hafif renk değişimi */
 }
 
 .file-upload-container input[type="file"] {
@@ -94,7 +100,7 @@ h1 {
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  width: 100%;
+  width: 85%;
 }
 
 .transcribe-button:disabled {

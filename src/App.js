@@ -21,15 +21,24 @@ const App = () => {
   ];
 
   const modelOptions = [
-    { value: 'tiny', label: 'Tiny Model  ', Tooltip: '39M parametre' },
-    { value: 'base', label: 'Base Model  ', Tooltip: '74M parametre' },
-    { value: 'small', label: 'Small Model  ', Tooltip: '244M parametre' },
-    { value: 'medium', label: 'Medium Model  ', Tooltip: '769M parametre' },
-    { value: 'large', label: 'Large Model  ', Tooltip: '1550M parametre' },
+    { value: 'tiny', label: 'Tiny Model  ', Tooltip: '75 MB' },
+    { value: 'base', label: 'Base Model  ', Tooltip: '150 MB' },
+    { value: 'small', label: 'Small Model  ', Tooltip: '300 MB' },
+    { value: 'medium', label: 'Medium Model  ', Tooltip: '1.2 GB' },
+    { value: 'large', label: 'Large Model  ', Tooltip: '2.9 GB' },
   ];
 
+  // Dosya seçme fonksiyonu
   const handleFileChange = (e) => {
     const file = e.target.files[0];
+    setAudioFile(file);
+    setFileName(file ? file.name : '');
+  };
+
+  // Sürükle bırak fonksiyonu
+  const handleFileDrop = (e) => {
+    e.preventDefault(); // Sayfanın yenilenmesini engelle
+    const file = e.dataTransfer.files[0];
     setAudioFile(file);
     setFileName(file ? file.name : '');
   };
@@ -42,6 +51,9 @@ const App = () => {
 
     setIsLoading(true);
 
+    // Transkript bölümünü temizle
+    setTranscript('');
+
     const formData = new FormData();
     formData.append('audio', audioFile);
     formData.append('language', selectedLanguage.value);
@@ -53,7 +65,7 @@ const App = () => {
       });
 
       if (response.data.transcript) {
-        setTranscript(response.data.transcript);
+        setTranscript(response.data.transcript); // Yeni transkripti ekle
       } else {
         alert('Transkript elde edilemedi');
       }
@@ -99,7 +111,14 @@ const App = () => {
     <div className="App">
       <h1>Whisper Transkript Uygulaması</h1>
 
-      <div className="file-upload-container" title='Ses Dosyası Seçiniz'>
+      {/* Sürükle bırak alanı */}
+      <div
+        className="file-upload-container"
+        title="Ses Dosyası Seçiniz"
+        onDrop={handleFileDrop}
+        onDragOver={(e) => e.preventDefault()} // Dragover olayını engelle
+        style={{ backgroundColor: 'transparent' }} // Şeffaf arka plan
+      >
         <input
           type="file"
           accept="audio/*"
@@ -133,7 +152,6 @@ const App = () => {
           placeholder="Model Seçiniz"
           className="select-box"
           styles={customSelectStyles}
-          
         />
       </div>
 
