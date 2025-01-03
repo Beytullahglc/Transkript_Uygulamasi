@@ -48,24 +48,29 @@ const App = () => {
       alert('Lütfen Dosya, Dil ve Model Seçin');
       return;
     }
-
+  
     setIsLoading(true);
-
+  
     // Transkript bölümünü temizle
     setTranscript('');
-
+  
     const formData = new FormData();
     formData.append('audio', audioFile);
     formData.append('language', selectedLanguage.value);
     formData.append('model', selectedModel.value);
-
+  
     try {
       const response = await axios.post('http://localhost:5000/transcribe', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
-
+  
       if (response.data.transcript) {
-        setTranscript(response.data.transcript); // Yeni transkripti ekle
+        // Konuşmacı bilgilerini filtrele
+        const cleanedTranscript = response.data.transcript.replace(/(speaker\s?\d{1,2}:?\s?)/gi, '');
+        
+        // Satır sonlarını <br> etiketlerine çevir
+        const formattedTranscript = cleanedTranscript.replace(/\n/g, '<br/>');
+        setTranscript(formattedTranscript); // HTML formatında transkripti ekle
       } else {
         alert('Transkript elde edilemedi');
       }
@@ -172,7 +177,7 @@ const App = () => {
       {transcript && (
         <div className="transcript-result">
           <h3>Transcript:</h3>
-          <p>{transcript}</p>
+          <p dangerouslySetInnerHTML={{ __html: transcript }} />
         </div>
       )}
     </div>
